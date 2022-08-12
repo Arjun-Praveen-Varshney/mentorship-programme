@@ -3,6 +3,7 @@ import LoadingBar from "react-top-loading-bar";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { app, database } from "../firebaseConfig";
 import {
   collection,
@@ -34,16 +35,20 @@ function MyApp({ Component, pageProps }) {
         onLoaderFinished={() => setprogress(0)}
       />
       <Navbar />
-      <Component
-        app={app}
-        mentors={mentors}
-        mentees={mentees}
-        addDoc={addDoc}
-        getDocs={getDocs}
-        updateDoc={updateDoc}
-        deleteDoc={deleteDoc}
-        {...pageProps}
-      />
+      <GoogleOAuthProvider
+        clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
+      >
+        <Component
+          app={app}
+          mentors={mentors}
+          mentees={mentees}
+          addDoc={addDoc}
+          getDocs={getDocs}
+          updateDoc={updateDoc}
+          deleteDoc={deleteDoc}
+          {...pageProps}
+        />
+      </GoogleOAuthProvider>
     </>
   );
 }
