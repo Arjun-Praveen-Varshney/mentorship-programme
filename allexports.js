@@ -14,12 +14,13 @@ export const createOrGetUser = async (response, addUser) => {
       .join("")
   );
 
-  const { name, picture, sub } = JSON.parse(jsonPayload);
+  const { name, picture, sub, email } = JSON.parse(jsonPayload);
 
   const user = {
     _id: sub,
     _type: "user",
     userName: name,
+    loginemail: email,
     image: picture,
   };
 
