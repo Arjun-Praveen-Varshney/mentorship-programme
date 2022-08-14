@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { database } from "../firebaseConfig";
+import { app, database } from "../firebaseConfig";
 import {
   collection,
   addDoc,
@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }) {
         clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
       >
         <Component
+          app={app}
           mentors={mentors}
           mentees={mentees}
           addDoc={addDoc}
