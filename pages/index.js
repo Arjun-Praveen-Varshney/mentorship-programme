@@ -2,16 +2,6 @@ import React from "react";
 import Head from "next/head";
 
 export default function Home() {
-  // const [notesArray, setNotesArray] = useState([]);
-  // const getData = () => {
-  //   getDocs(mentors).then((data) => {
-  //     setNotesArray(
-  //       data.docs.map((item) => {
-  //         return { ...item.data(), id: item.id };
-  //       })
-  //     );
-  //   });
-  // };
   return (
     <div className="">
       <Head>
@@ -20,183 +10,157 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Pitchfork Kickstarter Taxidermy
+        <div className="container px-5 py-12 mx-auto">
+          <div className="flex flex-wrap w-full mb-16 flex-col items-center text-center">
+            <h1 className="sm:text-3xl md:text-7xl font-medium title-font mb-2 text-gray-900">
+              1:1 Mentoring
             </h1>
-            <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify, subway tile poke farm-to-table.
-            </p>
           </div>
-          <div className="flex flex-wrap -m-4">
-            <div className="xl:w-1/3 md:w-1/2 p-4">
-              <div className="border border-gray-200 p-6 rounded-lg">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  Shooting Stars
-                </h2>
-                <p className="leading-relaxed text-base">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
-                </p>
-              </div>
+          <div className="m-8">
+            <div>
+              <h2 className="text-2xl font-thin">1:1 Mentoring</h2>
             </div>
-            <div className="xl:w-1/3 md:w-1/2 p-4">
-              <div className="border border-gray-200 p-6 rounded-lg">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="6" cy="6" r="3"></circle>
-                    <circle cx="6" cy="18" r="3"></circle>
-                    <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  The Catalyzer
-                </h2>
-                <p className="leading-relaxed text-base">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
-                </p>
-              </div>
+            <div>
+              <ul className="list-disc">
+                <li className="font-medium">
+                  Students fill up an application form indicating their long and
+                  short-term goals, and optionally, a preferred mentor.
+                </li>
+                <li className="font-medium">
+                  Mentors are listed on Mentors Web Page, with their areas of
+                  interest, a brief statement about their work and their
+                  strengths.
+                </li>
+                <li className="font-medium">
+                  Mentees reach out to mentors to see if they are available.
+                </li>
+                <li className="font-medium">Mentors may accept or reject.</li>
+                <li className="font-medium">
+                  Mentoring relationship lasts about 3 months or 6 meetings.
+                  This is so that multiple students can benefit from the
+                  program.
+                </li>
+              </ul>
             </div>
-            <div className="xl:w-1/3 md:w-1/2 p-4">
-              <div className="border border-gray-200 p-6 rounded-lg">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  Neptune
-                </h2>
-                <p className="leading-relaxed text-base">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
-                </p>
-              </div>
+            <br />
+            <br />
+            <div>
+              <ul className="list-disc">
+                <li className="font-medium">
+                  Note: For the first batch of students, the organizers will
+                  match mentees and mentors based on the applications submitted
+                  by the students.
+                </li>
+                <li className="font-medium">
+                  Each mentor will mentor a small number of mentees. The
+                  mentee-mentor meeting is setup individually, at mutual
+                  convenience of mentor and mentee.
+                </li>
+                <li className="font-medium">
+                  All the mentors/mentees who participated will be requested to
+                  submit feedback about their experience after the mentoring
+                  phase concludes, which could last 2-6 months.
+                </li>
+              </ul>
             </div>
-            <div className="xl:w-1/3 md:w-1/2 p-4">
-              <div className="border border-gray-200 p-6 rounded-lg">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  Melanchole
-                </h2>
-                <p className="leading-relaxed text-base">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
-                </p>
-              </div>
+            <br />
+            <br />
+            <div>
+              <h2 className="text-2xl font-thin">Mentoring Sessions</h2>
             </div>
-            <div className="xl:w-1/3 md:w-1/2 p-4">
-              <div className="border border-gray-200 p-6 rounded-lg">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  Bunker
-                </h2>
-                <p className="leading-relaxed text-base">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
-                </p>
-              </div>
+            <div>
+              <ul className="list-disc">
+                <li className="font-medium">
+                  After the mentor/student match, the student and mentor set up
+                  a mutually agreeable time to meet using a voice/video
+                  conference.
+                </li>
+                <li className="font-medium">
+                  We expect that mentoring sessions should be about 30 mins - 1
+                  hour, 2 times a month.
+                </li>
+                <li className="font-medium">
+                  Total mentoring duration could last 2 months - 6 months. After
+                  that they can mutually decide if they want to continue to
+                  meet.
+                </li>
+              </ul>
             </div>
-            <div className="xl:w-1/3 md:w-1/2 p-4">
-              <div className="border border-gray-200 p-6 rounded-lg">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  Ramona Falls
-                </h2>
-                <p className="leading-relaxed text-base">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
-                </p>
-              </div>
+            <br />
+            <br />
+            <div>
+              <h2 className="text-2xl font-thin">Some Topics of Discussion</h2>
+            </div>
+            <div>
+              <h2 className="font-medium">
+                The most common questions from students revolve around career
+                and next steps:
+              </h2>
+            </div>
+            <div>
+              <ul className="list-disc">
+                <li className="font-medium">Career Guidance</li>
+                <li className="font-medium">Future Studies</li>
+                <li className="font-medium">
+                  Help with entrepreneurship, technical skills, robotics, etc
+                </li>
+                <li className="font-medium">
+                  Any other advice that can improve a students life
+                </li>
+                <li className="font-medium">Improving soft skills</li>
+                <li className="font-medium">
+                  Characteristics of success in academia / industry / government
+                  and so on.
+                </li>
+                <li className="font-medium">Organizing Job Search</li>
+                <li className="font-medium">
+                  What are the life experiences of mentor so far
+                </li>
+                <li className="font-medium">
+                  What are the life of a software engineer/data
+                  scientist/entrepreneur… about?
+                </li>
+                <li className="font-medium">Starting a company</li>
+                <li className="font-medium">
+                  Is it worth going abroad for a job? Is it worth settling
+                  there? And many more...
+                </li>
+              </ul>
+            </div>
+            <br />
+            <br />
+            <div>
+              <h2 className="text-2xl font-thin">Purpose:</h2>
+            </div>
+            <div>
+              <ul className="list-disc">
+                <li className="font-medium">
+                  One-to-one career guidance from industry experts and academic
+                  experts (Similar to Alumni Mentorship Program at IIT Roorkee)
+                </li>
+              </ul>
+            </div>
+            <br />
+            <br />
+            <div>
+              <h2 className="text-2xl font-thin">Goals:</h2>
+            </div>
+            <div>
+              <ul className="list-disc">
+                <li className="font-medium">
+                  With all the resources on your fingertips, we strongly believe
+                  there should be very little difference between an IIT vs the
+                  other colleges
+                </li>
+                <li className="font-medium">
+                  Our goal is to take every college in India to reach the same
+                  level of placement success as in IITs
+                </li>
+              </ul>
             </div>
           </div>
-          <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Button
-          </button>
         </div>
       </section>
-      {/* <div className="container">
-        <button onClick={getData}>Get Docs</button>
-      </div>
-      <div>
-        {notesArray.map((note) => {
-          return (
-            <div key={note.id}>
-              <h3>{note.name}</h3>
-              <p>{note.description}</p>
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 }
