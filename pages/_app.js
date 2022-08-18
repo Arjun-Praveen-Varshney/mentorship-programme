@@ -34,10 +34,10 @@ function MyApp({ Component, pageProps }) {
         progress={progress}
         onLoaderFinished={() => setprogress(0)}
       />
-      <Navbar />
       <GoogleOAuthProvider
         clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
       >
+      <Navbar />
         <Component
           app={app}
           mentors={mentors}
