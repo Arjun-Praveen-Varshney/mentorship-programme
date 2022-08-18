@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import useAuthStore from "../allexports";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +16,6 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
   const [course, setcourse] = useState("");
   const [yearofpassout, setyearofpassout] = useState("");
   const [fieldofinterest, setfieldofinterest] = useState("");
-  const [allmentors, setallmentors] = useState("");
   const [discussion, setdiscussion] = useState("");
   const [linkedin, setlinkedin] = useState("");
   const [github, setgithub] = useState("");
@@ -48,8 +46,6 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
       setyearofpassout(e.target.value);
     } else if (e.target.name == "fieldofinterest") {
       setfieldofinterest(e.target.value);
-    } else if (e.target.name == "allmentors") {
-      setallmentors(e.target.value);
     } else if (e.target.name == "discussion") {
       setdiscussion(e.target.value);
     } else if (e.target.name == "linkedin") {
@@ -73,7 +69,7 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
       course: course,
       yearofpassout: yearofpassout,
       fieldofinterest: fieldofinterest,
-      mentor: allmentors,
+      mentor: "",
       talk: discussion,
       linkedin: linkedin,
       github: github,
@@ -90,6 +86,9 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
       draggable: true,
       progress: undefined,
     });
+    setTimeout(() => {
+      router.push("/allmentors");
+    }, 1000);
   };
 
   const verifiedmentor = mentorsarray.filter((teacher) => {
@@ -220,7 +219,7 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
                           />
                         </div>
                       </div>
-                      <div className="p-2 w-1/2">
+                      <div className="p-2 w-full">
                         <div className="relative">
                           <label
                             htmlFor="fieldofinterest"
@@ -228,57 +227,28 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
                           >
                             Field of Interest
                           </label>
-                          <input
-                            onChange={handleChange}
+                          <select
                             value={fieldofinterest}
-                            list="fieldsofinterest"
-                            type="text"
+                            onChange={handleChange}
                             id="fieldofinterest"
                             name="fieldofinterest"
                             className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                          />
-                          <datalist id="fieldsofinterest">
-                            <option value="AI/ML" />
-                            <option value="VR/AR" />
-                            <option value="Brain Computer Interface" />
-                            <option value="Mobile App Development" />
-                            <option value="Web Development" />
-                            <option value="UI/UX Design" />
-                            <option value="Others" />
-                          </datalist>
-                        </div>
-                      </div>
-                      <div className="p-2 w-1/2">
-                        <div className="relative">
-                          <label
-                            htmlFor="allmentors"
-                            className="leading-7 text-sm text-gray-600"
                           >
-                            Select a Mentor
-                          </label>
-                          <input
-                            onChange={handleChange}
-                            value={allmentors}
-                            list="sarementors"
-                            type="text"
-                            id="allmentors"
-                            name="allmentors"
-                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                          />
-                          <datalist id="sarementors">
-                            {mentorsarray.map((teacher) => {
-                              return (
-                                <>
-                                  {fieldofinterest == teacher.description && (
-                                    <option
-                                      key={teacher.id}
-                                      value={teacher.name}
-                                    />
-                                  )}
-                                </>
-                              );
-                            })}
-                          </datalist>
+                            <option value="">None</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="VR/AR">VR/AR</option>
+                            <option value="Brain Computer Interface">
+                              Brain Computer Interface
+                            </option>
+                            <option value="Mobile App Development">
+                              Mobile App Development
+                            </option>
+                            <option value="Web Development">
+                              Web Development
+                            </option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                            <option value="Others">Others</option>
+                          </select>
                         </div>
                       </div>
                       <div className="p-2 w-full">
