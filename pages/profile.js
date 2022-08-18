@@ -4,13 +4,26 @@ import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
-import useAuthStore, { createOrGetUser } from "../allexports";
+import useAuthStore from "../allexports";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Login({ getDocs, mentors }) {
+export default function Login({ getDocs, mentors, addDoc, mentees }) {
   const [user, setUser] = useState(null);
   const [mentorsarray, setMentorsarray] = useState([]);
   const router = useRouter();
   const { userProfile, addUser, removeUser } = useAuthStore();
+  const [college, setcollege] = useState("");
+  const [course, setcourse] = useState("");
+  const [yearofpassout, setyearofpassout] = useState("");
+  const [fieldofinterest, setfieldofinterest] = useState("");
+  const [allmentors, setallmentors] = useState("");
+  const [discussion, setdiscussion] = useState("");
+  const [linkedin, setlinkedin] = useState("");
+  const [github, setgithub] = useState("");
+  const [portfolio, setportfolio] = useState("");
+  const [personalwebsite, setpersonalwebsite] = useState("");
+  const [cv, setcv] = useState("");
 
   useEffect(() => {
     setUser(userProfile);
@@ -26,6 +39,59 @@ export default function Login({ getDocs, mentors }) {
     });
   }, []);
 
+  const handleChange = (e) => {
+    if (e.target.name == "college") {
+      setcollege(e.target.value);
+    } else if (e.target.name == "course") {
+      setcourse(e.target.value);
+    } else if (e.target.name == "yearofpassout") {
+      setyearofpassout(e.target.value);
+    } else if (e.target.name == "fieldofinterest") {
+      setfieldofinterest(e.target.value);
+    } else if (e.target.name == "allmentors") {
+      setallmentors(e.target.value);
+    } else if (e.target.name == "discussion") {
+      setdiscussion(e.target.value);
+    } else if (e.target.name == "linkedin") {
+      setlinkedin(e.target.value);
+    } else if (e.target.name == "github") {
+      setgithub(e.target.value);
+    } else if (e.target.name == "portfolio") {
+      setportfolio(e.target.value);
+    } else if (e.target.name == "personalwebsite") {
+      setpersonalwebsite(e.target.value);
+    } else if (e.target.name == "cv") {
+      setcv(e.target.files[0]);
+    }
+  };
+
+  const addDocument = async () => {
+    const docRef = await addDoc(mentees, {
+      name: user.userName,
+      email: user.loginemail,
+      college: college,
+      course: course,
+      yearofpassout: yearofpassout,
+      fieldofinterest: fieldofinterest,
+      mentor: allmentors,
+      talk: discussion,
+      linkedin: linkedin,
+      github: github,
+      portfolio: portfolio,
+      personalwebsite: personalwebsite,
+      // cv: cv,
+    });
+    toast.success("Form submitted successfully!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   const verifiedmentor = mentorsarray.filter((teacher) => {
     if (user) {
       return user.loginemail !== teacher.email ? false : true;
@@ -36,6 +102,17 @@ export default function Login({ getDocs, mentors }) {
       <Head>
         <title>Profile</title>
       </Head>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {user && (
         <>
           {verifiedmentor == false ? (
@@ -62,9 +139,10 @@ export default function Login({ getDocs, mentors }) {
                             Name
                           </label>
                           <input
+                            readOnly={true}
                             type="text"
                             id="name"
-                            defaultValue={user.userName}
+                            value={user.userName}
                             name="name"
                             className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           />
@@ -79,6 +157,7 @@ export default function Login({ getDocs, mentors }) {
                             Email
                           </label>
                           <input
+                            readOnly={true}
                             type="email"
                             id="email"
                             name="email"
@@ -96,6 +175,8 @@ export default function Login({ getDocs, mentors }) {
                             College
                           </label>
                           <input
+                            onChange={handleChange}
+                            value={college}
                             type="text"
                             id="college"
                             name="college"
@@ -112,6 +193,8 @@ export default function Login({ getDocs, mentors }) {
                             Course
                           </label>
                           <input
+                            onChange={handleChange}
+                            value={course}
                             type="text"
                             id="course"
                             name="course"
@@ -128,6 +211,8 @@ export default function Login({ getDocs, mentors }) {
                             Year of Passout
                           </label>
                           <input
+                            value={yearofpassout}
+                            onChange={handleChange}
                             type="text"
                             id="yearofpassout"
                             name="yearofpassout"
@@ -144,6 +229,8 @@ export default function Login({ getDocs, mentors }) {
                             Field of Interest
                           </label>
                           <input
+                            onChange={handleChange}
+                            value={fieldofinterest}
                             list="fieldsofinterest"
                             type="text"
                             id="fieldofinterest"
@@ -170,6 +257,8 @@ export default function Login({ getDocs, mentors }) {
                             Select a Mentor
                           </label>
                           <input
+                            onChange={handleChange}
+                            value={allmentors}
                             list="sarementors"
                             type="text"
                             id="allmentors"
@@ -179,7 +268,14 @@ export default function Login({ getDocs, mentors }) {
                           <datalist id="sarementors">
                             {mentorsarray.map((teacher) => {
                               return (
-                                <option key={teacher.id} value={teacher.name} />
+                                <>
+                                  {fieldofinterest == teacher.description && (
+                                    <option
+                                      key={teacher.id}
+                                      value={teacher.name}
+                                    />
+                                  )}
+                                </>
                               );
                             })}
                           </datalist>
@@ -195,6 +291,8 @@ export default function Login({ getDocs, mentors }) {
                             mentor? (Long answer)
                           </label>
                           <textarea
+                            value={discussion}
+                            onChange={handleChange}
                             id="discussion"
                             name="discussion"
                             className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
@@ -210,6 +308,8 @@ export default function Login({ getDocs, mentors }) {
                             LinkedIn Profile
                           </label>
                           <input
+                            value={linkedin}
+                            onChange={handleChange}
                             type="text"
                             id="linkedin"
                             name="linkedin"
@@ -226,6 +326,8 @@ export default function Login({ getDocs, mentors }) {
                             GitHub Profile
                           </label>
                           <input
+                            value={github}
+                            onChange={handleChange}
                             type="text"
                             id="github"
                             name="github"
@@ -242,6 +344,8 @@ export default function Login({ getDocs, mentors }) {
                             Portfolio Link
                           </label>
                           <input
+                            value={portfolio}
+                            onChange={handleChange}
                             type="text"
                             id="portfolio"
                             name="portfolio"
@@ -258,6 +362,8 @@ export default function Login({ getDocs, mentors }) {
                             Personal Website
                           </label>
                           <input
+                            value={personalwebsite}
+                            onChange={handleChange}
                             type="text"
                             id="personalwebsite"
                             name="personalwebsite"
@@ -274,6 +380,7 @@ export default function Login({ getDocs, mentors }) {
                             Updated CV
                           </label>
                           <input
+                            onChange={handleChange}
                             type="file"
                             id="cv"
                             name="cv"
@@ -282,7 +389,10 @@ export default function Login({ getDocs, mentors }) {
                         </div>
                       </div>
                       <div className="p-2 w-full">
-                        <button className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600">
+                        <button
+                          onClick={addDocument}
+                          className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600"
+                        >
                           Submit
                         </button>
                       </div>
