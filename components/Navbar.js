@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import useAuthStore, { createOrGetUser } from "../allexports";
 
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+  const { userProfile, addUser, removeUser } = useAuthStore();
+  useEffect(() => {
+    setUser(userProfile);
+  }, [userProfile]);
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -30,13 +39,26 @@ const Navbar = () => {
             <a className="mr-5 hover:text-gray-900">Something else</a>
           </Link>
         </nav>
-        <Link href={"/profile"}>
-          <a>
-            <button className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0">
-              Login
-            </button>
-          </a>
-        </Link>
+        {user ? (
+          <button
+            className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0"
+            onClick={() => {
+              googleLogout();
+              removeUser();
+              router.push("/");
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <GoogleLogin
+            onSuccess={(response) => {
+              createOrGetUser(response, addUser);
+              router.push("/profile");
+            }}
+            onError={() => console.log("Login Failed")}
+          />
+        )}
       </div>
     </header>
   );
