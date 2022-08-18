@@ -16,7 +16,7 @@ export default function Login({ getDocs, mentors }) {
     setUser(userProfile);
   }, [userProfile]);
 
-  const getData = () => {
+  useEffect(() => {
     getDocs(mentors).then((data) => {
       setMentorsarray(
         data.docs.map((item) => {
@@ -24,7 +24,7 @@ export default function Login({ getDocs, mentors }) {
         })
       );
     });
-  };
+  }, []);
 
   const verifiedmentor = mentorsarray.filter((teacher) => {
     if (user) {
@@ -36,13 +36,7 @@ export default function Login({ getDocs, mentors }) {
       <Head>
         <title>Profile</title>
       </Head>
-      {!user && (
-        <div>
-          <img src="/vercel.svg" alt="logo" className="w-auto h-12 mx-auto" />
-          <h1 className="text-3xl font-extrabold my-6">Sign In / Sign Up</h1>
-        </div>
-      )}
-      {user ? (
+      {user && (
         <>
           {verifiedmentor == false ? (
             <div className="flex gap-5 md:gap-10">
@@ -88,7 +82,7 @@ export default function Login({ getDocs, mentors }) {
                             type="email"
                             id="email"
                             name="email"
-                            defaultValue={user.loginemail}
+                            value={user.loginemail}
                             className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           />
                         </div>
@@ -96,47 +90,201 @@ export default function Login({ getDocs, mentors }) {
                       <div className="p-2 w-full">
                         <div className="relative">
                           <label
-                            htmlFor="message"
+                            htmlFor="college"
                             className="leading-7 text-sm text-gray-600"
                           >
-                            Message
+                            College
+                          </label>
+                          <input
+                            type="text"
+                            id="college"
+                            name="college"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-1/2">
+                        <div className="relative">
+                          <label
+                            htmlFor="course"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Course
+                          </label>
+                          <input
+                            type="text"
+                            id="course"
+                            name="course"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-1/2">
+                        <div className="relative">
+                          <label
+                            htmlFor="yearofpassout"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Year of Passout
+                          </label>
+                          <input
+                            type="text"
+                            id="yearofpassout"
+                            name="yearofpassout"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-1/2">
+                        <div className="relative">
+                          <label
+                            htmlFor="fieldofinterest"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Field of Interest
+                          </label>
+                          <input
+                            list="fieldsofinterest"
+                            type="text"
+                            id="fieldofinterest"
+                            name="fieldofinterest"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                          <datalist id="fieldsofinterest">
+                            <option value="AI/ML" />
+                            <option value="VR/AR" />
+                            <option value="Brain Computer Interface" />
+                            <option value="Mobile App Development" />
+                            <option value="Web Development" />
+                            <option value="UI/UX Design" />
+                            <option value="Others" />
+                          </datalist>
+                        </div>
+                      </div>
+                      <div className="p-2 w-1/2">
+                        <div className="relative">
+                          <label
+                            htmlFor="allmentors"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Select a Mentor
+                          </label>
+                          <input
+                            list="sarementors"
+                            type="text"
+                            id="allmentors"
+                            name="allmentors"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                          <datalist id="sarementors">
+                            {mentorsarray.map((teacher) => {
+                              return (
+                                <option key={teacher.id} value={teacher.name} />
+                              );
+                            })}
+                          </datalist>
+                        </div>
+                      </div>
+                      <div className="p-2 w-full">
+                        <div className="relative">
+                          <label
+                            htmlFor="discussion"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            What are you interested in discussing with the
+                            mentor? (Long answer)
                           </label>
                           <textarea
-                            id="message"
-                            name="message"
+                            id="discussion"
+                            name="discussion"
                             className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                           ></textarea>
                         </div>
                       </div>
                       <div className="p-2 w-full">
-                        <button
-                          onClick={getData}
-                          className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600"
-                        >
-                          View all Mentors
-                        </button>
-                        <button
-                          className="w-full border-2 p-2 rounded-md text-white bg-indigo-500 hover:bg-indigo-600"
-                          onClick={() => {
-                            googleLogout();
-                            removeUser();
-                          }}
-                        >
-                          Logout
-                        </button>
+                        <div className="relative">
+                          <label
+                            htmlFor="linkedin"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            LinkedIn Profile
+                          </label>
+                          <input
+                            type="text"
+                            id="linkedin"
+                            name="linkedin"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
                       </div>
-                      <div className="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
-                        <h1 className="font-bold text-2xl">Our Mentors:</h1>
-                        <p>
-                          {mentorsarray.map((teacher) => {
-                            return (
-                              <div key={teacher.id}>
-                                <h3>Name: {teacher.name}</h3>
-                                <p>Description: {teacher.description}</p>
-                              </div>
-                            );
-                          })}
-                        </p>
+                      <div className="p-2 w-full">
+                        <div className="relative">
+                          <label
+                            htmlFor="github"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            GitHub Profile
+                          </label>
+                          <input
+                            type="text"
+                            id="github"
+                            name="github"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-full">
+                        <div className="relative">
+                          <label
+                            htmlFor="portfolio"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Portfolio Link
+                          </label>
+                          <input
+                            type="text"
+                            id="portfolio"
+                            name="portfolio"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-full">
+                        <div className="relative">
+                          <label
+                            htmlFor="personalwebsite"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Personal Website
+                          </label>
+                          <input
+                            type="text"
+                            id="personalwebsite"
+                            name="personalwebsite"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-full">
+                        <div className="relative">
+                          <label
+                            htmlFor="cv"
+                            className="leading-7 text-sm text-gray-600"
+                          >
+                            Updated CV
+                          </label>
+                          <input
+                            type="file"
+                            id="cv"
+                            name="cv"
+                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-2 w-full">
+                        <button className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600">
+                          Submit
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -149,11 +297,6 @@ export default function Login({ getDocs, mentors }) {
             </div>
           )}
         </>
-      ) : (
-        <GoogleLogin
-          onSuccess={(response) => createOrGetUser(response, addUser)}
-          onError={() => console.log("Login Failed")}
-        />
       )}
     </div>
   );
