@@ -161,6 +161,153 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="mx-auto py-16 lg:py-20 px-4 lg:px-16">
+        <div className="px-4 md:px-8 xl:px-16">
+          <span className="font-inter font-bold uppercase text-sm text-pink-400 mb-2 block">
+            More on mentorship
+          </span>
+          <h2 className="font-bold mb-8 text-xl md:text-2xl">
+            Learn how to get the most from your mentorships.
+          </h2>
+        </div>
+        <div className="grid gap-5 md:mx-auto md:grid-cols-3 md:max-w-none">
+          <a
+            href=""
+            className="group flex flex-col rounded-lg shadow-lg hover:shadow-xl overflow-hidden"
+          >
+            <div className="flex-shrink-0">
+              <div className="hidden h-48 w-full object-cover">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="text-3xl text-gray-600 pr-1"
+                >
+                  <g
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 15h10M9 19h10" stroke="#468cef"></path>
+                    <path
+                      d="M5 21V1h18v18a4 4 0 01-4 4H3"
+                      stroke="#0a259c"
+                    ></path>
+                    <path d="M5 21a2 2 0 11-4 0V10.959" stroke="#0a259c"></path>
+                    <path d="M9 5h10v6H9z" stroke="#468cef"></path>
+                  </g>
+                </svg>
+              </div>
+              <img
+                src="/assets/stock/1.png"
+                className="h-48 w-full object-cover"
+              />
+            </div>
+            <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+              <div className="flex-1 pb-2">
+                <h3 className="text-lg leading-7 font-semibold text-gray-900 truncate">
+                  Why mentorship works
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-gray-500">
+                  Scientists have long studied the most effective ways to learn.
+                  The conclusions? Exactly what you might expect: if you want to
+                  le...
+                </p>
+              </div>
+            </div>
+          </a>
+          <a
+            href=""
+            className="group flex flex-col rounded-lg shadow-lg hover:shadow-xl overflow-hidden"
+          >
+            <div className="flex-shrink-0">
+              <div className="hidden h-48 w-full object-cover">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="text-3xl text-gray-600 pr-1"
+                >
+                  <g
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 15h10M9 19h10" stroke="#468cef"></path>
+                    <path
+                      d="M5 21V1h18v18a4 4 0 01-4 4H3"
+                      stroke="#0a259c"
+                    ></path>
+                    <path d="M5 21a2 2 0 11-4 0V10.959" stroke="#0a259c"></path>
+                    <path d="M9 5h10v6H9z" stroke="#468cef"></path>
+                  </g>
+                </svg>
+              </div>
+              <img
+                src="/assets/stock/2.png"
+                className="h-48 w-full object-cover"
+              />
+            </div>
+            <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+              <div className="flex-1 pb-2">
+                <h3 className="text-lg leading-7 font-semibold text-gray-900 truncate">
+                  What to expect from your mentorship
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-gray-500">
+                  A mentor on Pelion is like having cheat codes to your work
+                  life. How does this all work? Read on! Interacting with your
+                  mentor...
+                </p>
+              </div>
+            </div>
+          </a>
+          <a
+            href=""
+            className="group flex flex-col rounded-lg shadow-lg hover:shadow-xl overflow-hidden"
+          >
+            <div className="flex-shrink-0">
+              <div className="hidden h-48 w-full object-cover">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="text-3xl text-gray-600 pr-1"
+                >
+                  <g
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 15h10M9 19h10" stroke="#468cef"></path>
+                    <path
+                      d="M5 21V1h18v18a4 4 0 01-4 4H3"
+                      stroke="#0a259c"
+                    ></path>
+                    <path d="M5 21a2 2 0 11-4 0V10.959" stroke="#0a259c"></path>
+                    <path d="M9 5h10v6H9z" stroke="#468cef"></path>
+                  </g>
+                </svg>
+              </div>
+              <img
+                src="/assets/stock/3.png"
+                className="h-48 w-full object-cover"
+              />
+            </div>
+            <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+              <div className="flex-1 pb-2">
+                <h3 className="text-lg leading-7 font-semibold text-gray-900 truncate">
+                  How to get the most out of your mentorship
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-gray-500">
+                  So, youve found your mentor and cant wait to jump in. Now
+                  what? Heres how to get the most out of your mentorship. Goal
+                  sett...
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
