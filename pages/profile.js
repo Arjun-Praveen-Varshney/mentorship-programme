@@ -420,7 +420,13 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
                   </section>
                 </div>
               ) : (
-                <div>you have already filled this form earlier</div>
+                <div>
+                  <h1>You have already filled this form earlier...</h1>
+                  <br />
+                  <button onClick={router.push("/allmentors")}>
+                    View Mentors
+                  </button>
+                </div>
               )}
             </>
           ) : (
