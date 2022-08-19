@@ -35,8 +35,8 @@ const Navbar = () => {
           <Link href={"/about"}>
             <a className="mr-5 hover:text-gray-900">About Us</a>
           </Link>
-          <Link href={""}>
-            <a className="mr-5 hover:text-gray-900">Something else</a>
+          <Link href={"/allmentors"}>
+            <a className="mr-5 hover:text-gray-900">Browse Mentors</a>
           </Link>
         </nav>
         {user ? (
