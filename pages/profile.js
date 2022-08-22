@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useAuthStore from "../allexports";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { doc, setDoc } from "firebase/firestore";
+import { database } from "../firebaseConfig";
 
-export default function Login({ getDocs, mentors, addDoc, mentees }) {
+export default function Login({ getDocs, mentors, mentees }) {
   const [user, setUser] = useState(null);
   const [mentorsarray, setMentorsarray] = useState([]);
   const [menteesarray, setMenteesarray] = useState([]);
   const router = useRouter();
-  const { userProfile, addUser, removeUser } = useAuthStore();
+  const { userProfile } = useAuthStore();
   const [college, setcollege] = useState("");
   const [course, setcourse] = useState("");
   const [yearofpassout, setyearofpassout] = useState("");
@@ -76,7 +76,7 @@ export default function Login({ getDocs, mentors, addDoc, mentees }) {
     if (other) {
       fieldofinterest = other;
     }
-    const docRef = await addDoc(mentees, {
+    await setDoc(doc(database, "mentees", user.loginemail), {
       name: user.userName,
       email: user.loginemail,
       college: college,
