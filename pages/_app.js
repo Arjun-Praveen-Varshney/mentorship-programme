@@ -5,15 +5,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { app, database } from "../firebaseConfig";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
-const mentors = collection(database, "mentors");
-const mentees = collection(database, "mentees");
+import { collection, getDocs } from "firebase/firestore";
+export const mentors = collection(database, "mentors");
+export const mentees = collection(database, "mentees");
 
 function MyApp({ Component, pageProps }) {
   const [progress, setprogress] = useState(0);
@@ -37,15 +31,12 @@ function MyApp({ Component, pageProps }) {
       <GoogleOAuthProvider
         clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
       >
-      <Navbar />
+        <Navbar />
         <Component
           app={app}
           mentors={mentors}
           mentees={mentees}
-          addDoc={addDoc}
           getDocs={getDocs}
-          updateDoc={updateDoc}
-          deleteDoc={deleteDoc}
           {...pageProps}
         />
       </GoogleOAuthProvider>
