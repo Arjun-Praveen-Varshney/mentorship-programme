@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import useAuthStore from "../allexports";
+import { getDocs } from "firebase/firestore";
+import { mentors } from "./_app";
+import Link from "next/link";
 
-const Allmentors = ({ getDocs, mentors }) => {
-  const [user, setUser] = useState(null);
-  const [mentorsarray, setMentorsarray] = useState([]);
-  const router = useRouter();
-  const { userProfile, addUser, removeUser } = useAuthStore();
-  useEffect(() => {
-    setUser(userProfile);
-  }, [userProfile]);
-
-  useEffect(() => {
-    getDocs(mentors).then((data) => {
-      setMentorsarray(
-        data.docs.map((item) => {
-          return { ...item.data(), id: item.id };
-        })
-      );
-    });
-  }, []);
+const Allmentors = ({ mentorsarray }) => {
   return (
     <div>
       <Head>
@@ -39,7 +23,7 @@ const Allmentors = ({ getDocs, mentors }) => {
             </p>
           </div>
           <div className="flex flex-wrap -m-4">
-            {mentorsarray.map((mentor) => {
+            {mentorsarray[0].map((mentor) => {
               return (
                 <div key={mentor.id} className="p-4 lg:w-1/4 md:w-1/2">
                   <div className="h-full flex flex-col items-center text-center">
@@ -54,24 +38,13 @@ const Allmentors = ({ getDocs, mentors }) => {
                       </h2>
                       <h3 className="text-gray-500 mb-3">{mentor.skill}</h3>
                       <p className="mb-4">{mentor.description}</p>
-                      {user && (
-                        <button
-                          className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0"
-                          onClick={() => {
-                            router.push("/");
-                          }}
-                        >
-                          Apply under this mentor
-                        </button>
-                      )}
-                      <button
-                        className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base m-1"
-                        onClick={() => {
-                          router.push("/");
-                        }}
-                      >
-                        View Profile
-                      </button>
+                      <Link href={`/mentorprofiles/${mentor.email}`}>
+                        <a>
+                          <button className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base m-1">
+                            View Profile
+                          </button>
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -85,3 +58,17 @@ const Allmentors = ({ getDocs, mentors }) => {
 };
 
 export default Allmentors;
+
+export async function getServerSideProps(context) {
+  const mentorsarray = [];
+  await getDocs(mentors).then((data) => {
+    mentorsarray.push(
+      data.docs.map((item) => {
+        return { ...item.data(), id: item.id };
+      })
+    );
+  });
+  return {
+    props: { mentorsarray },
+  };
+}
