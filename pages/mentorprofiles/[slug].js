@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { query, where, getDocs, doc, setDoc } from "firebase/firestore";
+import { query, where, getDocs, doc, updateDoc } from "firebase/firestore";
 import Head from "next/head";
 import { mentors } from "../_app";
 import useAuthStore from "../../allexports";
@@ -17,16 +17,20 @@ const Slug = ({ onementor }) => {
 
   const updateDocument = async () => {
     const mentorRef = doc(database, "mentees", user.loginemail);
-    await setDoc(mentorRef, { mentor: onementor[0][0].name }, { merge: true });
-    toast.success("Mentor request submitted successfully!", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    try {
+      await updateDoc(mentorRef, { mentor: onementor[0][0].name });
+      toast.success("Mentor request submitted successfully!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      alert("Please fill out your profile form first!");
+    }
   };
   return (
     <div className="flex gap-5 md:gap-10">
@@ -186,7 +190,7 @@ const Slug = ({ onementor }) => {
                       </label>
                       <textarea
                         //discussion}
-                        value={teacher.description}
+                        // value={teacher.description}
                         id="discussion"
                         name="discussion"
                         className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
