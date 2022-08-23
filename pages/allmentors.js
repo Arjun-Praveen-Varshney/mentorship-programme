@@ -22,14 +22,14 @@ const Allmentors = ({ mentorsarray }) => {
               havent heard of them.
             </p>
           </div>
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap items-center justify-center -m-4">
             {mentorsarray[0].map((mentor) => {
               return (
                 <div key={mentor.id} className="p-4 lg:w-1/4 md:w-1/2">
                   <div className="h-full flex flex-col items-center text-center">
                     <img
                       alt="team"
-                      className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
+                      className="flex-shrink-0 rounded-full w-full h-72 object-cover object-center mb-4"
                       src={mentor.image}
                     />
                     <div className="w-full">
@@ -37,7 +37,7 @@ const Allmentors = ({ mentorsarray }) => {
                         {mentor.name}
                       </h2>
                       <h3 className="text-gray-500 mb-3">{mentor.skill}</h3>
-                      <p className="mb-4">{mentor.description}</p>
+                      <p className="mb-4"></p>
                       <Link href={`/mentorprofiles/${mentor.email}`}>
                         <a>
                           <button className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base m-1">
