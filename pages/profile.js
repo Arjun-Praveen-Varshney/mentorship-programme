@@ -448,46 +448,42 @@ export default function Login({ getDocs, mentors, mentees }) {
             <section className="text-gray-600 body-font">
               <div className="container px-5 py-12 mx-auto">
                 <div className="flex flex-col text-center w-full mb-20">
-                  <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                  <h1 className="text-2xl font-medium title-font mb-4 text-gray-900">
                     ALL MENTEES
                   </h1>
                   <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                     Whatever cardigan tote bag tumblr hexagon brooklyn
                     asymmetrical gentrify, subway tile poke farm-to-table.
-                    Franzen you probably have not heard of them.
+                    Franzen you probably havent heard of them.
                   </p>
                 </div>
-                <div className="flex flex-wrap -m-2">
+                <div className="flex flex-wrap items-center justify-center -m-4">
                   {menteesarray.map((mentee) => {
                     return (
-                      <div
-                        key={mentee.id}
-                        className="p-2 lg:w-1/3 md:w-1/2 w-full cursor-pointer"
-                      >
-                        <Link href={`/menteeprofiles/${mentee.email}`}>
-                          <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                            <svg
-                              fill="none"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              className="w-10 h-10"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                              <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            <div className="flex-grow ml-2">
-                              <h2 className="text-gray-900 title-font font-medium">
-                                {mentee.name}
-                              </h2>
-                              <p className="text-gray-500">
-                                {mentee.fieldofinterest}
-                              </p>
-                            </div>
+                      <div key={mentee.id} className="p-4 lg:w-1/4 md:w-1/2">
+                        <div className="h-full flex flex-col items-center text-center">
+                          <img
+                            alt="team"
+                            className="flex-shrink-0 rounded-full w-full h-72 object-cover object-center mb-4"
+                            src={mentee.image}
+                          />
+                          <div className="w-full">
+                            <h2 className="title-font font-medium text-lg text-gray-900">
+                              {mentee.name}
+                            </h2>
+                            <h3 className="text-gray-500 mb-3">
+                              {mentee.skill}
+                            </h3>
+                            <p className="mb-4"></p>
+                            <Link href={`/menteeprofiles/${mentee.email}`}>
+                              <a>
+                                <button className="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base m-1">
+                                  View Profile
+                                </button>
+                              </a>
+                            </Link>
                           </div>
-                        </Link>
+                        </div>
                       </div>
                     );
                   })}
