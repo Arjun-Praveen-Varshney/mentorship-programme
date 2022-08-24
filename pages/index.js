@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Typewriter from "typewriter-effect";
 
 export default function Home() {
   return (
@@ -20,52 +21,23 @@ export default function Home() {
           <div className="space-y-8">
             <div className="mt-20 mb-12 mx-auto max-w-7xl px-4 sm:mt-24">
               <h1 className="text-center tracking-tight font-normal text-blue-400 text-5xl leading-normal">
-                <span>1-on-1</span>
-                {/* <span
-                  className="font-bold"
-                  id="typed-headline"
-                  data-typeitid="wqj42blsqxd"
-                >
-                  <span
-                    style={{
-                      display: "inline",
-                      position: "relative",
-                      font: "inherit",
-                      color: "inherit",
-                      lineHeight: "inherit",
-                    }}
-                    className="ti-wrapper"
-                  >
-                    <span
-                      style={{
-                        display: "inline",
-                        position: "relative",
-                        font: "inherit",
-                        color: "inherit",
-                        lineHeight: "inherit",
-                      }}
-                      className="ti-container"
-                    >
-                      AWS
-                    </span>
-                    <span
-                      style={{
-                        display: "inline",
-                        position: "relative",
-                        font: "inherit",
-                        color: "inherit",
-                        lineHeight: "inherit",
-                        left: "-.25ch",
-                      }}
-                      className="ti-cursor"
-                    >
-                      |
-                    </span>
-                  </span>
-                </span> */}
-                <span className="-ml-2">Mentorship</span>
+                Mentorship on{" "}
+                <Typewriter
+                  options={{
+                    strings: [
+                      "AI/ML",
+                      "VR/AR",
+                      "Brain Computer Interface",
+                      "Entrepreneurship",
+                      "Mobile App Development",
+                      "Web Development",
+                      "UI/UX Design",
+                    ],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
               </h1>
-              <h1 className="hidden">1-on-1 Mentorship</h1>
 
               <p className="lg:text-center mt-3 max-w-screen-md mx-auto text-blue-400 md:mt-6 text-2xl md:leading-normal md:max-w-3xl">
                 Master your craft with leading mentors at your side. Grow with
@@ -292,7 +264,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gray-100 text-blue-400 -mt-4">
+        <div className="bg-gray-100 text-blue-400 -mt-4 mb-12">
           <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
             <div className="space-y-12">
               <div className="mx-auto space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
