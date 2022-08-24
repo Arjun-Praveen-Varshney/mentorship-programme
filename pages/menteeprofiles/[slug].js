@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { query, where, getDocs } from "firebase/firestore";
 import Head from "next/head";
 import { mentees } from "../_app";
-import "react-toastify/dist/ReactToastify.css";
+import useAuthStore from "../../allexports";
+import Link from "next/link";
 
 const Slug = ({ onementee }) => {
+  const [user, setUser] = useState(null);
+  const { userProfile } = useAuthStore();
+
+  useEffect(() => {
+    setUser(userProfile);
+  }, [userProfile]);
   return (
-    <div className="flex gap-5 md:gap-10">
+    <div>
       <Head>
         <title>
           {onementee[0].length > 0 ? onementee[0][0].name : "No mentee found"}
@@ -14,256 +21,189 @@ const Slug = ({ onementee }) => {
       </Head>
       {onementee[0].map((student) => {
         return (
-          <section
+          <div
             key={student.id}
-            className="text-gray-600 body-font relative"
+            className="bg-white shadow overflow-hidden sm:rounded-lg"
           >
-            <div className="container px-5 py-12 mx-auto">
-              <div className="flex flex-col text-center w-full mb-12">
-                <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-                  Profile details
-                </h1>
-                <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                  This is the profile page of this particular mentee.
-                </p>
-              </div>
-              <div className="lg:w-1/2 md:w-2/3 mx-auto">
-                <div className="flex flex-wrap -m-2">
-                  <div className="p-2 w-1/2">
-                    <div className="relative">
-                      <label
-                        htmlFor="name"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Name
-                      </label>
-                      <input
-                        readOnly={true}
-                        type="text"
-                        id="name"
-                        value={student.name}
-                        //user.userName}
-                        name="name"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-1/2">
-                    <div className="relative">
-                      <label
-                        htmlFor="email"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Email
-                      </label>
-                      <input
-                        readOnly={true}
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={student.email}
-                        //user.loginemail}
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="college"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        College
-                      </label>
-                      <input
-                        value={student.college}
-                        //college}
-                        type="text"
-                        id="college"
-                        name="college"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-1/2">
-                    <div className="relative">
-                      <label
-                        htmlFor="course"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Course
-                      </label>
-                      <input
-                        value={student.course}
-                        //course}
-                        type="text"
-                        id="course"
-                        name="course"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-1/2">
-                    <div className="relative">
-                      <label
-                        htmlFor="yearofpassout"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Year of Passout
-                      </label>
-                      <input
-                        value={student.yearofpassout}
-                        //yearofpassout}
-
-                        type="text"
-                        id="yearofpassout"
-                        name="yearofpassout"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="fieldofinterest"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Field of Interest
-                      </label>
-                      <input
-                        value={student.fieldofinterest}
-                        //yearofpassout}
-
-                        type="text"
-                        id="fieldofinterest"
-                        name="fieldofinterest"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="discussion"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        What are you interested in discussing with the mentee?
-                        (Long answer)
-                      </label>
-                      <textarea
-                        //discussion}
-                        value={student.talk}
-                        id="discussion"
-                        name="discussion"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="linkedin"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        LinkedIn Profile
-                      </label>
-                      <input
-                        value={student.linkedin}
-                        //linkedin}
-
-                        type="text"
-                        id="linkedin"
-                        name="linkedin"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="github"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        GitHub Profile
-                      </label>
-                      <input
-                        value={student.github}
-                        //github}
-
-                        type="text"
-                        id="github"
-                        name="github"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="portfolio"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Portfolio Link
-                      </label>
-                      <input
-                        value={student.portfolio}
-                        //portfolio}
-
-                        type="text"
-                        id="portfolio"
-                        name="portfolio"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="personalwebsite"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Personal Website
-                      </label>
-                      <input
-                        value={student.personalwebsite}
-                        //personalwebsite}
-
-                        type="text"
-                        id="personalwebsite"
-                        name="personalwebsite"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label
-                        htmlFor="cv"
-                        className="leading-7 text-sm text-gray-600"
-                      >
-                        Updated CV
-                      </label>
-                      <input
-                        value={student.cv}
-                        type="text"
-                        id="cv"
-                        name="cv"
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-2 w-full">
-                    {/* <button
-                        onClick={updateDocument}
-                        className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600"
-                      >
-                        Apply under this mentee
-                      </button> */}
-                  </div>
-                </div>
-              </div>
+            <div className="px-4 py-5 sm:px-6">
+              <h3 className="text-lg leading-6 font-medium text-gray-900">
+                Applicant Information
+              </h3>
+              <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                Personal details and application.
+              </p>
             </div>
-          </section>
+            <div className="border-t border-gray-200">
+              <dl>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Full name
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.name}
+                  </dd>
+                </div>
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Application for
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.fieldofinterest}
+                  </dd>
+                </div>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Email address
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.email}
+                  </dd>
+                </div>
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">College</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.college}
+                  </dd>
+                </div>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Year of Passout
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.yearofpassout}
+                  </dd>
+                </div>
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Course</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.course}
+                  </dd>
+                </div>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Mentor requested for
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.mentor}
+                  </dd>
+                </div>
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Topic for Discussion
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {student.talk}
+                  </dd>
+                </div>
+                {student.linkedin != "" && (
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      LinkedIn
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {student.linkedin}
+                    </dd>
+                  </div>
+                )}
+                {student.github != "" && (
+                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      GitHub
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {student.github}
+                    </dd>
+                  </div>
+                )}
+                {student.portfolio != "" && (
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Portfolio
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {student.portfolio}
+                    </dd>
+                  </div>
+                )}
+                {student.personalwebsite != "" && (
+                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Personal Website
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {student.personalwebsite}
+                    </dd>
+                  </div>
+                )}
+
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Attachments
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul
+                      role="list"
+                      className="border border-gray-200 rounded-md divide-y divide-gray-200"
+                    >
+                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        <div className="w-0 flex-1 flex items-center">
+                          <svg
+                            className="flex-shrink-0 h-5 w-5 text-gray-400"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="ml-2 flex-1 w-0 truncate">
+                            {" "}
+                            {student.cv}{" "}
+                          </span>
+                        </div>
+                        <div className="ml-4 flex-shrink-0">
+                          <a
+                            href="#"
+                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                          >
+                            {" "}
+                            Download{" "}
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Actions</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul
+                      role="list"
+                      className="border border-gray-200 rounded-md divide-y divide-gray-200"
+                    >
+                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        {user && user.loginemail == student.email && (
+                          <div className="p-2 w-full">
+                            <Link href={`/updateprofile/${student.email}`}>
+                              <a>
+                                <button className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600">
+                                  Update Profile
+                                </button>
+                              </a>
+                            </Link>
+                          </div>
+                        )}
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
         );
       })}
     </div>
