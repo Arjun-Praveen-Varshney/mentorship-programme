@@ -224,7 +224,9 @@ const Slug = ({ onementor }) => {
                         {user.loginemail == teacher.email && (
                           <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                             <div className="p-2 w-full">
-                              <Link href={`/updateprofile/${teacher.email}`}>
+                              <Link
+                                href={`/updatementorprofile/${teacher.email}`}
+                              >
                                 <a>
                                   <button className="w-full border-2 text-white bg-indigo-500 rounded-md p-2 hover:bg-indigo-600">
                                     Update Profile
