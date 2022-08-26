@@ -88,7 +88,7 @@ export default function Login({ getDocs, mentors, mentees }) {
     ) {
       alert("Please fill out the required fields!");
     } else {
-      const storageRef = ref(storage, `mentees/${user.loginemail}`);
+      const storageRef = ref(storage, `mentees/${user.loginemail}/cv`);
       await setDoc(doc(database, "mentees", user.loginemail), {
         name: user.userName,
         email: user.loginemail,
