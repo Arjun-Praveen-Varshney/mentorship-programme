@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { query, where, getDocs, doc, updateDoc } from "firebase/firestore";
+import {
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+  setDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import Head from "next/head";
 import { mentors } from "../_app";
 import useAuthStore from "../../allexports";
@@ -18,8 +26,14 @@ const Slug = ({ onementor }) => {
 
   const updateDocument = async () => {
     const mentorRef = doc(database, "mentees", user.loginemail);
+    const menteeRef = doc(database, "mentors", onementor[0][0].email);
     try {
       await updateDoc(mentorRef, { mentor: onementor[0][0].name });
+      await setDoc(
+        menteeRef,
+        { mentees: arrayUnion({ email: user.loginemail }) },
+        { merge: true }
+      );
       toast.success("Mentor request submitted successfully!", {
         position: "top-left",
         autoClose: 5000,
