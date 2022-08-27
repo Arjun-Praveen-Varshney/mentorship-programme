@@ -35,6 +35,9 @@ const Navbar = () => {
           <Link href={"/onetoonementoring"}>
             <a className="mr-5 hover:text-gray-900">1-1 Mentoring</a>
           </Link>
+          <Link href={"/ihubwalkthrough"}>
+            <a className="mr-5 hover:text-gray-900">iHUB Walkthrough</a>
+          </Link>
           <Link href={"/allmentors"}>
             <a className="mr-5 hover:text-gray-900">Browse Mentors</a>
           </Link>
